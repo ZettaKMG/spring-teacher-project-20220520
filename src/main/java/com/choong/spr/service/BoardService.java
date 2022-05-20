@@ -20,9 +20,9 @@ public class BoardService {
 	@Autowired
 	private ReplyMapper replyMapper;
 	
-	public List<BoardDto> listBoard() {
+	public List<BoardDto> listBoard(String keyword) {
 		// TODO Auto-generated method stub
-		return mapper.selectBoardAll();
+		return mapper.selectBoardAll("%" + keyword + "%");
 	}
 
 	public boolean insertBoard(BoardDto board) {
@@ -46,11 +46,6 @@ public class BoardService {
 		replyMapper.deleteByBoardId(id);
 		
 		return mapper.deleteBoard(id) == 1;
-	}
-
-	public List<BoardDto> searchBoard(String keyword) {
-		
-		return mapper.listBoardByKeyword("%" + keyword + "%");
 	}
 
 }

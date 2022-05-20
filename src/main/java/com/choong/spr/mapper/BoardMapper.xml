@@ -3,20 +3,16 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.choong.spr.mapper.BoardMapper">
-
-	<select id="listBoardByKeyword" resultType="com.choong.spr.domain.BoardDto">
-		SELECT b.id, b.title, b.inserted, COUNT(r.id) numOfReply
-		FROM Board b LEFT JOIN Reply r ON b.id = r.board_id
-		WHERE title LIKE #{keyword }
-		GROUP BY b.id
-		ORDER BY b.id DESC
-	</select>
 	
 	<select id="selectBoardAll" resultType="com.choong.spr.domain.BoardDto">
 		SELECT b.id, b.title, b.inserted, COUNT(r.id) numOfReply
 		FROM Board b LEFT JOIN Reply r ON b.id = r.board_id
+		<if test="keyword != '%%'">
+			WHERE title LIKE #{keyword }
+		</if>
 		GROUP BY b.id
 		ORDER BY b.id DESC
+
 	</select>
 	
 	<insert id="insertBoard" useGeneratedKeys="true" keyColumn="id" keyProperty="id">

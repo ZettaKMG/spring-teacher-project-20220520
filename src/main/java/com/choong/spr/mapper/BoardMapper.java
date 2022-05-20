@@ -6,7 +6,7 @@ import com.choong.spr.domain.BoardDto;
 
 public interface BoardMapper {
 
-	List<BoardDto> selectBoardAll();
+	List<BoardDto> selectBoardAll(String keyword);
 
 	int insertBoard(BoardDto board);
 
@@ -15,7 +15,5 @@ public interface BoardMapper {
 	int updateBoard(BoardDto dto);
 
 	int deleteBoard(int id);
-
-	List<BoardDto> listBoardByKeyword(String keyword);
 
 }
