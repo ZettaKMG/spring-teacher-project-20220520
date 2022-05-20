@@ -31,6 +31,12 @@ public class BoardController {
 		model.addAttribute("boardList", list);
 	}
 	
+	@RequestMapping(path="list", params = "keyword")
+	public void search(String keyword, Model model) {
+		List<BoardDto> list = service.searchBoard(keyword);
+		model.addAttribute("boardList", list);
+	}
+	
 	@GetMapping("insert")
 	public void insert() {
 		

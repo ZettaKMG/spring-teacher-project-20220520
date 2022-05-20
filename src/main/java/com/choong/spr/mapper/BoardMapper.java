@@ -16,4 +16,6 @@ public interface BoardMapper {
 
 	int deleteBoard(int id);
 
+	List<BoardDto> listBoardByKeyword(String keyword);
+
 }

@@ -48,6 +48,11 @@ public class BoardService {
 		return mapper.deleteBoard(id) == 1;
 	}
 
+	public List<BoardDto> searchBoard(String keyword) {
+		
+		return mapper.listBoardByKeyword("%" + keyword + "%");
+	}
+
 }
 
 
