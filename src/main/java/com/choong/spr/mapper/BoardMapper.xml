@@ -8,11 +8,22 @@
 		SELECT b.id, b.title, b.inserted, COUNT(r.id) numOfReply
 		FROM Board b LEFT JOIN Reply r ON b.id = r.board_id
 		<if test="keyword != '%%'">
-			WHERE title LIKE #{keyword }
+			<choose>
+				<when test="type == 'all'">
+					WHERE b.title LIKE #{keyword } OR b.body LIKE #{keyword }
+				</when>
+			
+				<when test="type == 'title'">
+					WHERE b.title LIKE #{keyword }
+				</when>
+								
+				<when test="type == 'body'">
+					WHERE b.body LIKE #{keyword }
+				</when>
+			</choose>
 		</if>
 		GROUP BY b.id
 		ORDER BY b.id DESC
-
 	</select>
 	
 	<insert id="insertBoard" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
