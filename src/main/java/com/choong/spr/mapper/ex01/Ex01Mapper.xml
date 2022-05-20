@@ -21,4 +21,13 @@
 		FROM Categories
 		ORDER BY 1
 	</select>
+	
+	<select id="selectProductsThan" resultType="com.choong.spr.domain.ex01.Products">
+		<![CDATA[
+			SELECT c.CategoryName, p.ProductName, p.Unit, p.Price 
+			FROM Products p 
+			JOIN Categories c ON p.CategoryID = c.CategoryID
+			WHERE p.Price < #{price }
+		]]>
+	</select>
 </mapper>

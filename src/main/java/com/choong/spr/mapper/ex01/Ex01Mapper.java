@@ -11,4 +11,6 @@ public interface Ex01Mapper {
 
 	List<Category> selectCategory();
 
+	List<Products> selectProductsThan(String price);
+
 }

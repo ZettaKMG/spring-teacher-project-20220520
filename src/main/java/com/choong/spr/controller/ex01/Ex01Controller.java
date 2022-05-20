@@ -27,9 +27,16 @@ public class Ex01Controller {
 		List<Category> categoryList = mapper.selectCategory();
 		List<Products> list = mapper.selectProducts(category);
 		
-		model.addAttribute("list", list);
 		model.addAttribute("categoryList", categoryList);
+		model.addAttribute("list", list);		
 		
+	}
+	
+	@RequestMapping("sub02")
+	public void method02(String price, Model model) {
 		
+		List<Products> list = mapper.selectProductsThan(price);
+		
+		model.addAttribute("list", list);
 	}
 }
