@@ -91,7 +91,7 @@ public class Ex03Controller {
 		System.out.println("name: " + name);
 		System.out.println("address: " + address);
 		
-		return null;
+		return "good~~~!!!";
 	}
 	
 	@PostMapping("sub11")
