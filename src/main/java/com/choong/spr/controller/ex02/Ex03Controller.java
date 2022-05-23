@@ -1,5 +1,8 @@
 package com.choong.spr.controller.ex02;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -105,16 +108,27 @@ public class Ex03Controller {
 		return "hello";
 	}
 	
-	@PostMapping("sub13")
-	public String method13(String title, String writer) {
-		System.out.println("title: " + title);
-		System.out.println("writer: " + writer);
-		
-		return "good!!!~~~";
+	@GetMapping("sub13")
+	public Integer method13() {
+		return (int) (Math.random() * 45 + 1);
 	}
 	
-	@PostMapping("sub14")
-	public void method14(Book book) {
-		System.out.println(book);
+	@GetMapping("sub14")
+	public Book method14() {
+		Book b = new Book();
+		b.setTitle("스프링");
+		b.setWriter("홍길동");
+		
+		return b;
+	}
+	
+	@GetMapping("sub15")
+	public Map<String, String> method15() {
+		Map<String, String> map = new HashMap<>();
+		map.put("name", "손흥민");
+		map.put("age", "30");
+		map.put("address", "london");
+		
+		return map;
 	}
 }

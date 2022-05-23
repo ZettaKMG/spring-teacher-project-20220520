@@ -75,14 +75,14 @@
 		});
 		
 		$("#button10").click(function(){
-			$.ajax({url : "/spr2/ex03/sub12",
+			$.ajax({url : "/spr2/ex03/sub10",
 					type : "post",
 					data : "name=ninave&address=elgasia" 
 			});
 		});
 		
 		$("#button11").click(function(){
-			$.ajax({url : "/spr2/ex03/sub13",
+			$.ajax({url : "/spr2/ex03/sub11",
 					type : "post",
 					data : "title=lostark&writer=smilegate" 
 			});
@@ -94,7 +94,7 @@
 			const dataString = $("#form1").serialize();
 			
 			$.ajax({
-					url : "/spr2/ex03/sub14",
+					url : "/spr2/ex03/sub10",
 					type : "post",
 					data : dataString
 			});
@@ -106,7 +106,7 @@
 			const data = $("#form2").serialize();
 			
 			$.ajax({
-					url : "/spr2/ex03/sub15",
+					url : "/spr2/ex03/sub11",
 					type : "post",
 					data : data
 			});
@@ -121,6 +121,40 @@
 					console.log("받은 데이터", data);
 				}
 			});			
+		});
+		
+		$("#button15").click(function() {
+			$.ajax({
+				url : "/spr2/ex03/sub13",
+				type : "get",
+				success : function(lotto) {
+					// console.log(data);
+					$("#result1").text(lotto);
+				}
+			});
+		});		
+		
+		$("#button16").click(function() {
+			$.ajax({
+				url : "/spr2/ex03/sub14",
+				type : "get",
+				success : function(book) {
+				 /* console.log(book);
+					console.log(book.title);
+					console.log(book.writer); */
+					$("#result2").text(book.title);
+					$("#result3").text(book.writer);
+				}
+			});			
+		});
+		
+		$("#button17").click(function() {
+			$.ajax({
+				url : "/spr2/ex03/sub15",
+				success : function(data) {
+					console.log(data);
+				}
+			});
 		});
 	});
 </script>
@@ -160,11 +194,11 @@
 	<%-- 전송될 데어터는 title, writer --%>
 	<button id="button09">post 방식 데이터 보내기2</button>
 	
-	<%-- /spr2/ex03/sub12 post 방식으로 데이터 보내기 --%>
+	<%-- /spr2/ex03/sub10 post 방식으로 데이터 보내기 --%>
 	<%-- 전송될 데이터는 name, address --%>
 	<button id="button10">post 방식 데이터 보내기 (encoded string)</button>
 	
-	<%-- /spr2/ex03/sub13 post 방식으로 데이터 보내기 --%>
+	<%-- /spr2/ex03/sub11 post 방식으로 데이터 보내기 --%>
 	<%-- 전송될 데이터는 title, writer --%>
 	<button id="button11">post 방식 데이터 보내기2 (encoded string)</button>
 	
@@ -190,8 +224,16 @@
 	<p>응답 처리 하기</p>
 	
 	<%-- url : /spr2/ex03/sub12, type : post --%>
-	<button id="button14">응답 처리1</button>
+	<button id="button14">응답 처리1</button> <br />
+		
+	<button id="button15">로또번호 받기</button>
+	<p>받은 번호 : <span id="result1"></span></p>
+	
+	<button id="button16">json 데이터 받기</button>
+	<p>책 제목 : <span id="result2"></span></p>
+	<p>책 저자 : <span id="result3"></span></p>
 	
 	
+	<button id="button17">map to json</button>
 </body>
 </html>
