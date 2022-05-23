@@ -39,4 +39,10 @@ public class Ex02Controller {
 		
 		return b;		
 	}
+	
+	@RequestMapping("sub05")
+	public String method05() {
+		
+		return "/ex03/sub01";			
+	}
 }
