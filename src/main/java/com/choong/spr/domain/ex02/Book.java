@@ -6,4 +6,7 @@ import lombok.Data;
 public class Book {
 	private String title;
 	private String writer;
+	
+	private String name;
+	private String address;
 }

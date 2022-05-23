@@ -13,7 +13,114 @@
 <script>
 	$(document).ready(function() {
 		$("#button1").click(function(){
-			$.ajax({url : "spr2/ex03/sub03"});			
+			$.ajax({url : "/spr2/ex03/sub03"});			
+		});
+		
+		$("#button2").click(function(){
+			$.ajax({url : "/spr2/ex03/sub04"});
+		});
+		
+		$("#button3").click(function(){
+			$.ajax({url : "/spr2/ex03/sub05", 
+					type : "get"
+			});
+		});
+		
+		$("#button4").click(function(){
+			$.ajax({url : "/spr2/ex03/sub06",
+					type : "post"
+			});
+		});
+		
+		$("#button5").click(function(){
+			$.ajax({url : "/spr2/ex03/sub07",
+					type : "delete"
+			});
+		});
+		
+		$("#button6").click(function(){
+			$.ajax({url : "/spr2/ex03/sub08",
+					type : "put"
+			});
+		});
+		
+		$("#button7").click(function(){
+			$.ajax({url : "/spr2/ex03/sub09",
+					type : "get", // type의 기본값은 get이므로 생략 가능
+					data : {
+						title : "epl",
+						writer : "son"
+					}
+			});
+		});
+		
+		$("#button8").click(function(){
+			$.ajax({url : "/spr2/ex03/sub10",
+					type : "post",
+					data : {
+						name : "ninave",
+						address : "elgasia"
+					}
+			});
+		});
+		
+		$("#button9").click(function(){
+			$.ajax({url : "/spr2/ex03/sub11",
+					type : "post",
+					data : {
+						title : "득점왕 되기",
+						writer : "손"
+					}
+			});
+		});
+		
+		$("#button10").click(function(){
+			$.ajax({url : "/spr2/ex03/sub12",
+					type : "post",
+					data : "name=ninave&address=elgasia" 
+			});
+		});
+		
+		$("#button11").click(function(){
+			$.ajax({url : "/spr2/ex03/sub13",
+					type : "post",
+					data : "title=lostark&writer=smilegate" 
+			});
+		});
+		
+		$("#button12").click(function(e) {
+			e.preventDefault();
+			
+			const dataString = $("#form1").serialize();
+			
+			$.ajax({
+					url : "/spr2/ex03/sub14",
+					type : "post",
+					data : dataString
+			});
+		});
+		
+		$("#button13").click(function(e) {
+			e.preventDefault();
+			
+			const data = $("#form2").serialize();
+			
+			$.ajax({
+					url : "/spr2/ex03/sub15",
+					type : "post",
+					data : data
+			});
+		});
+		
+		$("#button14").click(function() {
+			$.ajax({
+				url : "/spr2/ex03/sub12",
+				type : "post",
+				success : function(data) { // data : 응답 받은 data
+					console.log("요청 성공!!!");
+					console.log("받은 데이터", data);
+				}
+			});			
 		});
 	});
 </script>
@@ -25,6 +132,66 @@
 	
 	<%-- 이 버튼을 클릭하면 /spr2/ex03/sub04로 ajax 요청 보내기 --%>
 	<%-- 콘트롤러에도 해당경로 요청에 일하는 메소드 추가 --%>
-	<button id="button2">ajax 요청 보내기2</button>
+	<button id="button2">ajax 요청 보내기2</button> <br />
+	
+	<%-- /spr2/ex03/sub05 get 방식 요청 보내기 --%>
+	<button id="button3">get 방식 요청 보내기</button>
+	
+	<%-- /spr2/ex03/sub06 post 방식 요청 보내기 --%>
+	<button id="button4">post 방식 요청 보내기</button>
+	
+	<%-- /spr2/ex03/sub07 delete 방식 요청 보내기 --%>
+	<button id="button5">delete 방식 요청 보내기</button>
+	
+	<%-- /spr2/ex03/sub08 put 방식 요청 보내기 --%>
+	<button id="button6">put 방식 요청 보내기</button>
+	
+	<hr />
+	<p>서버로 데이터 보내기</p>
+	
+	<%-- /spr2/ex03/sub09 get 방식 데이터 보내기 --%>
+	<button id="button07">get 방식 데이터 보내기</button>
+	
+	<%-- /spr2/ex03/sub10 post 방식으로 데이터 보내기 --%>
+	<%-- 전송될 데어터는 name, address --%>
+	<button id="button08">post 방식 데이터 보내기</button>
+	
+	<%-- /spr2/ex03/sub11 post 방식으로 데이터 보내기 --%>
+	<%-- 전송될 데어터는 title, writer --%>
+	<button id="button09">post 방식 데이터 보내기2</button>
+	
+	<%-- /spr2/ex03/sub12 post 방식으로 데이터 보내기 --%>
+	<%-- 전송될 데이터는 name, address --%>
+	<button id="button10">post 방식 데이터 보내기 (encoded string)</button>
+	
+	<%-- /spr2/ex03/sub13 post 방식으로 데이터 보내기 --%>
+	<%-- 전송될 데이터는 title, writer --%>
+	<button id="button11">post 방식 데이터 보내기2 (encoded string)</button>
+	
+	<hr />
+	
+	<p>폼 데이터 보내기</p>
+	<form action="/spr2/ex03/sub14" id="form1" method="post">
+		name : <input type="text" name="name" /> <br />
+		address : <input type="text" name="address" /> <br />
+		<input id="button12" type="submit" value="전송" />
+	</form>
+	
+	<%-- #button13이 클릭되면 --%>
+	<%-- /spr2/ex03/sub15 --%>
+	<form action="/spr2/ex03/sub15" id="form2" method="post">
+		title : <input type="text" name="title" /> <br />
+		writer : <input type="text" name="writer" /> <br />
+		<input id="button13" type="submit" value="전송" />
+	</form>
+	
+	<hr />
+	
+	<p>응답 처리 하기</p>
+	
+	<%-- url : /spr2/ex03/sub12, type : post --%>
+	<button id="button14">응답 처리1</button>
+	
+	
 </body>
 </html>
