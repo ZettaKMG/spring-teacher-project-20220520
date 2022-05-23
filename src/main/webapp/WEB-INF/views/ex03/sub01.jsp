@@ -48,7 +48,7 @@
 			});
 		});
 		
-		$("#button7").click(function(){
+		$("#button7").click(function() {
 			$.ajax({
 				url : "/spr2/ex03/sub09",
 				type : "get", // type의 기본값은 get이므로 생략 가능
@@ -59,7 +59,7 @@
 			});
 		});
 		
-		$("#button8").click(function(){
+		$("#button8").click(function() {
 			$.ajax({
 				url : "/spr2/ex03/sub10",
 				type : "post",
@@ -70,7 +70,7 @@
 			});
 		});
 		
-		$("#button9").click(function(){
+		$("#button9").click(function() {
 			$.ajax({
 				url : "/spr2/ex03/sub11",
 				type : "post",
@@ -81,7 +81,7 @@
 			});
 		});
 		
-		$("#button10").click(function(){
+		$("#button10").click(function() {
 			$.ajax({
 				url : "/spr2/ex03/sub10",
 				type : "post",
@@ -89,7 +89,7 @@
 			});
 		});
 		
-		$("#button11").click(function(){
+		$("#button11").click(function() {
 			$.ajax({
 				url : "/spr2/ex03/sub11",
 				type : "post",
