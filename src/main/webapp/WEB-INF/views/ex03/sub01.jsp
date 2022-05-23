@@ -12,35 +12,39 @@
 
 <script>
 	$(document).ready(function() {
-		$("#button1").click(function(){
+		$("#button1").click(function() {
 			$.ajax({url : "/spr2/ex03/sub03"});			
 		});
 		
-		$("#button2").click(function(){
+		$("#button2").click(function() {
 			$.ajax({url : "/spr2/ex03/sub04"});
 		});
 		
-		$("#button3").click(function(){
-			$.ajax({url : "/spr2/ex03/sub05", 
-					type : "get"
+		$("#button3").click(function() {
+			$.ajax({
+				url : "/spr2/ex03/sub05", 
+				type : "get"
 			});
 		});
 		
-		$("#button4").click(function(){
-			$.ajax({url : "/spr2/ex03/sub06",
-					type : "post"
+		$("#button4").click(function() {
+			$.ajax({
+				url : "/spr2/ex03/sub06",
+				type : "post"
 			});
 		});
 		
-		$("#button5").click(function(){
-			$.ajax({url : "/spr2/ex03/sub07",
-					type : "delete"
+		$("#button5").click(function() {
+			$.ajax({
+				url : "/spr2/ex03/sub07",
+				type : "delete"
 			});
 		});
 		
-		$("#button6").click(function(){
-			$.ajax({url : "/spr2/ex03/sub08",
-					type : "put"
+		$("#button6").click(function() {
+			$.ajax({
+				url : "/spr2/ex03/sub08",
+				type : "put"
 			});
 		});
 		
