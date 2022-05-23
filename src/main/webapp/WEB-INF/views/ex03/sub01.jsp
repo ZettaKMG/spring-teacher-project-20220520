@@ -45,46 +45,51 @@
 		});
 		
 		$("#button7").click(function(){
-			$.ajax({url : "/spr2/ex03/sub09",
-					type : "get", // type의 기본값은 get이므로 생략 가능
-					data : {
-						title : "epl",
-						writer : "son"
-					}
+			$.ajax({
+				url : "/spr2/ex03/sub09",
+				type : "get", // type의 기본값은 get이므로 생략 가능
+				data : {
+					title : "epl",
+					writer : "son"
+				}
 			});
 		});
 		
 		$("#button8").click(function(){
-			$.ajax({url : "/spr2/ex03/sub10",
-					type : "post",
-					data : {
-						name : "ninave",
-						address : "elgasia"
-					}
+			$.ajax({
+				url : "/spr2/ex03/sub10",
+				type : "post",
+				data : {
+					name : "ninave",
+					address : "elgasia"
+				}
 			});
 		});
 		
 		$("#button9").click(function(){
-			$.ajax({url : "/spr2/ex03/sub11",
-					type : "post",
-					data : {
-						title : "득점왕 되기",
-						writer : "손"
-					}
+			$.ajax({
+				url : "/spr2/ex03/sub11",
+				type : "post",
+				data : {
+					title : "득점왕 되기",
+					writer : "손"
+				}
 			});
 		});
 		
 		$("#button10").click(function(){
-			$.ajax({url : "/spr2/ex03/sub10",
-					type : "post",
-					data : "name=ninave&address=elgasia" 
+			$.ajax({
+				url : "/spr2/ex03/sub10",
+				type : "post",
+				data : "name=ninave&address=elgasia" 
 			});
 		});
 		
 		$("#button11").click(function(){
-			$.ajax({url : "/spr2/ex03/sub11",
-					type : "post",
-					data : "title=lostark&writer=smilegate" 
+			$.ajax({
+				url : "/spr2/ex03/sub11",
+				type : "post",
+				data : "title=lostark&writer=smilegate" 
 			});
 		});
 		
