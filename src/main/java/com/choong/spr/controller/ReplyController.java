@@ -1,9 +1,13 @@
 package com.choong.spr.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.choong.spr.domain.ReplyDto;
@@ -51,6 +55,12 @@ public class ReplyController {
 		
 		rttr.addAttribute("id", dto.getBoardId());
 		return "redirect:/board/get";
+	}
+	
+	@GetMapping("list")
+	@ResponseBody
+	public List<ReplyDto> list(int boardId) {
+		return service.getReplyByBoardId(boardId);
 	}
 }
 
