@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -36,28 +38,30 @@ public class ReplyController {
 		
 	}
 
-	@PostMapping("modify")
-	public String modify(ReplyDto dto, RedirectAttributes rttr) {
+	@PostMapping(path = "modify", produces = "text/plain;charset=UTF-8")
+	@ResponseBody
+	public ResponseEntity<String> modify(ReplyDto dto) {
 		boolean success = service.updateReply(dto);
 
 		if (success) {
-			rttr.addFlashAttribute("message", "댓글이 수정되었습니다.");
+			return ResponseEntity.ok("댓글이 변경되었습니다.");
 		}
-
-		rttr.addAttribute("id", dto.getBoardId());
-		return "redirect:/board/get";
+		
+		return ResponseEntity.status(500).body("댓글 변경 중 오류 발생");
+			
 	}
 	
-	@PostMapping("delete")
-	public String delete(ReplyDto dto, RedirectAttributes rttr) {
-		boolean success = service.deleteReply(dto);
+	@DeleteMapping(path ="delete/{id}", produces = "text/plain;charset=UTF-8")
+	@ResponseBody
+	public ResponseEntity<String> delete(@PathVariable("id") int id) {
+		boolean success = service.deleteReply(id);
 		
 		if (success) {
-			rttr.addFlashAttribute("messag", "댓글이 삭제되었습니다.");
+			return ResponseEntity.ok("댓글을 삭제하였습니다.");
+		} else {
+			return ResponseEntity.status(500).body("");
 		}
 		
-		rttr.addAttribute("id", dto.getBoardId());
-		return "redirect:/board/get";
 	}
 	
 	@GetMapping("list")
