@@ -3,6 +3,7 @@ package com.choong.spr.controller.ex02;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -130,5 +131,21 @@ public class Ex03Controller {
 		map.put("address", "london");
 		
 		return map;
+	}
+	
+	@GetMapping("sub17")
+	public ResponseEntity<String> method17() {
+		return ResponseEntity.status(500).body("internal server error");
+	}
+	
+	@GetMapping("sub18")
+	public ResponseEntity<String> method18() {
+		boolean success = Math.random() > 0.5;
+		
+		if (success) {
+			return ResponseEntity.ok().body("data you want");
+		} else {
+			return ResponseEntity.status(500).body("something wrong");
+		}
 	}
 }

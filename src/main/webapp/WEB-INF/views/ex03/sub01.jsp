@@ -165,8 +165,84 @@
 				}
 			});
 		});
+		
+		$("#button18").click(function() {
+			$.ajax({
+				url : "/spr2/ex03/sub16",
+				type : "get",
+				success : function(data) {
+					console.log(data);
+				},
+				error : function() {
+					console.log("무엇인가 잘못됨.");
+				}
+			});
+		});
+		
+		$("#button19").click(function() {
+			$.ajax({
+				url : "/spr2/ex03/sub16",
+				success : function(data) {
+					
+				},
+				error : function() {
+					$("#message19").show();
+					$("#message19").text("처리 중 오류 발생").fadeOut(3000);
+				}
+			});
+		});
+		
+		$("#button20").click(function() {
+			$.ajax({
+				url : "/spr2/ex03/sub17",
+				success : function(data) {
+					console.log("받은 데이터", data);
+				},
+				error : function() {
+					console.log("무엇인가 잘못됨!!!");
+				}
+			});
+		});
+		
+		$("#button21").click(function() {
+			$.ajax({
+				url : "/spr2/ex03/sub18",
+				success : function(data) {
+					$("#message20").show();
+					$("#message20").removeClass("error").text(data).fadeOut(3000);
+				},
+				error : function(data) {
+					$("#message20").show();
+					$("#message20").addClass("error").text("무엇인가 잘못됨").fadeOut(3000);
+				}
+			});
+		});
+		
+		$("#button22").click(function() {
+			$.ajax({
+				url : "/spr2/ex03/sub18",
+				success : function(data) {
+					$("#message20").show();
+					$("#message20").removeClass("error").text(data).fadeOut(3000);
+				},
+				error : function(data) {
+					$("#message20").show();
+					$("#message20").addClass("error").text("무엇인가 잘못됨").fadeOut(3000);
+				},				
+				complete : function() {
+					console.log("항상 실행됨!!!");
+				} 
+			});
+		});
 	});
 </script>
+
+<style>
+	.error {
+		background-color : red;
+		color : green;
+	}
+</style>
 
 <title>Insert title here</title>
 </head>
@@ -244,5 +320,23 @@
 	
 	
 	<button id="button17">map to json</button>
+	
+	<hr />
+	
+	<p>요청이 실패할 경우</p>
+	
+	<button id="button18">잘못된 요청</button> <br />
+	
+	<button id="button19">잘못된 요청2</button>
+	<p class="error" id="message19"></p> <br />
+	
+	<button id="button20">서버에서 에러 응답</button> <br />
+	
+	<button id="button21">50% 확률로 ok</button>
+	
+	<p id="message20"></p> <br />
+	
+	<button id="button22">50% 확률로 ok2</button>
+	
 </body>
 </html>
