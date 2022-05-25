@@ -38,11 +38,14 @@
 	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
 	      <div class="modal-body">
-	        ...
+	      	<form id="form1" action="${appRoot }/member/remove" method="post">
+		        <input type="hidden"  />		     		
+	      		암호 : <input type="password" value="${member.id }" name="id" />
+	      	</form>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary">Save changes</button>
+	        <button type="button" class="btn btn-danger">탈퇴</button>
 	      </div>
 	    </div>
 	  </div>

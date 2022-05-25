@@ -18,4 +18,6 @@ public interface MemberMapper {
 
 	MemberDto selectMemberById(String id);
 
+	int deleteMemberById(String id);
+
 }

@@ -94,9 +94,19 @@ public class MemberController {
 	public void getMember(String id, Model model) {
 		MemberDto member = service.getMemberById(id);
 		
-		model.addAttribute("member", member);
-		
-		
+		model.addAttribute("member", member);		
 	}
 	
+	@PostMapping("remove")
+	public String removeMember(MemberDto dto, RedirectAttributes rttr) {
+		boolean success = service.removeMember(dto);
+		
+		if (success) {
+			rttr.addFlashAttribute("message", "회원 탈퇴 되었습니다.");
+			return "redirect:/board/list";
+		} else {
+			rttr.addAttribute("id", dto.getId());
+			return "redirect:/member/get";
+		}
+	}
 }

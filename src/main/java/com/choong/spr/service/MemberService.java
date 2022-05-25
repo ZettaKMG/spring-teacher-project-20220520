@@ -15,32 +15,42 @@ public class MemberService {
 	private MemberMapper memberMapper;
 	
 	public boolean addMember(MemberDto member) {
-		// TODO Auto-generated method stub
+	
 		return memberMapper.insertMember(member) == 1;
 	}
 
 	public boolean hasMemberId(String id) {
-		// TODO Auto-generated method stub
+	
 		return memberMapper.countMemberId(id) > 0;
 	}
 
 	public boolean hasMemberEmail(String email) {
-		// TODO Auto-generated method stub
+	
 		return memberMapper.countEmail(email) > 0;
 	}
 
 	public boolean hasMemberNickName(String nickName) {
-		// TODO Auto-generated method stub
+	
 		return memberMapper.countNickName(nickName) > 0;
 	}
 
 	public List<MemberDto> listMember() {
-		// TODO Auto-generated method stub
+	
 		return memberMapper.selectMemberAll();
 	}
 
 	public MemberDto getMemberById(String id) {
-		// TODO Auto-generated method stub
+		
 		return memberMapper.selectMemberById(id);
+	}
+
+	public boolean removeMember(MemberDto dto) {
+		MemberDto member = memberMapper.selectMemberById(dto.getId());
+		
+		if (member.getPassword().equals(dto.getPassword())) {
+			return memberMapper.deleteMemberById(dto.getId()) == 1;
+		}
+		
+		return false;
 	}
 }
