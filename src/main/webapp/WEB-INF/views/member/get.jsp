@@ -39,13 +39,13 @@
 	      </div>
 	      <div class="modal-body">
 	      	<form id="form1" action="${appRoot }/member/remove" method="post">
-		        <input type="hidden"  />		     		
-	      		암호 : <input type="password" value="${member.id }" name="id" />
+		        <input type="hidden" value="${member.id }" name="id" />		     		
+	      		암호 : <input type="password" name="password" />
 	      	</form>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-danger">탈퇴</button>
+	        <button form="form1" type="submit" class="btn btn-danger">탈퇴</button>
 	      </div>
 	    </div>
 	  </div>
