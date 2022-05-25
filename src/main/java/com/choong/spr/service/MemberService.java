@@ -1,5 +1,7 @@
 package com.choong.spr.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,5 +32,15 @@ public class MemberService {
 	public boolean hasMemberNickName(String nickName) {
 		// TODO Auto-generated method stub
 		return memberMapper.countNickName(nickName) > 0;
+	}
+
+	public List<MemberDto> listMember() {
+		// TODO Auto-generated method stub
+		return memberMapper.selectMemberAll();
+	}
+
+	public MemberDto getMemberById(String id) {
+		// TODO Auto-generated method stub
+		return memberMapper.selectMemberById(id);
 	}
 }

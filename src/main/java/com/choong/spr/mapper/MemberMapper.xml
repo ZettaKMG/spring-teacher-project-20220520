@@ -21,4 +21,14 @@
 		SELECT COUNT(nickName) FROM Member WHERE nickName = #{nickName}
 	</select>
 	
+	<select id="selectMemberAll" resultType="com.choong.spr.domain.MemberDto">
+		SELECT id, password, email, nickName, inserted FROM Member	
+		ORDER BY inserted DESC
+	</select>
+	
+	<select id="selectMemberById" resultType="com.choong.spr.domain.MemberDto">
+		SELECT id, password, email, nickName, inserted FROM Member	
+		WHERE id = #{id}
+	</select>
+	
 </mapper>
