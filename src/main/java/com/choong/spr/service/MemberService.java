@@ -21,4 +21,14 @@ public class MemberService {
 		// TODO Auto-generated method stub
 		return memberMapper.countMemberId(id) > 0;
 	}
+
+	public boolean hasMemberEmail(String email) {
+		// TODO Auto-generated method stub
+		return memberMapper.countEmail(email) > 0;
+	}
+
+	public boolean hasMemberNickName(String nickName) {
+		// TODO Auto-generated method stub
+		return memberMapper.countNickName(nickName) > 0;
+	}
 }

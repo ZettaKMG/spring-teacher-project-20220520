@@ -13,29 +13,98 @@
 
 <script>
 	$(document).ready(function() {
-		$("#checkIdbutton1").click(function(e) {
+		// 아이디 중복 체크 버튼 클릭 이벤트
+		$("#checkIdButton1").click(function(e) {
 			e.preventDefault();
 			
 			$(this).attr("disabled", "");
 			const data = {
-					id : $("#form1").find("[name=id]").val()
-					
+					id : $("#form1").find("[name=id]").val()					
 			};		
 			$.ajax({
 				url : "${appRoot}/member/check",
 				type : "get",
 				data : data,
-				success : function() {
-					
+				success : function(data) {
+					switch (data) {
+						case "ok" :
+							$("#idMessage1").text("사용 가능한 아이디입니다.");
+							break;
+						case "notOk" :
+							$("#idMessage1").text("사용 불가능한 아이디입니다.");
+							break;
+					}
 				},
 				error : function() {
-					
+					$("#idMessage1").text("중복 확인 중 문제 발생, 다시 시도해주세요.");
 				},
 				complete : function() {
 					$("#checkIdButton1").removeAttr("disabled");
 				}
 			});
 		});
+			
+		// 이메일 중복 체크 버튼 클릭 이벤트
+		$("#checkEmailButton1").click(function(e) {
+			e.preventDefault();
+			
+			$(this).attr("disabled", "");
+			const data = {
+					email : $("#form1").find("[name=email]").val()
+			};
+			$.ajax({
+				url : "${appRoot}/member/check",
+				type : "get",
+				data : data,
+				success : function(data) {
+					switch (data) {
+						case "ok" :
+							$("#emailMessage1").text("사용 가능한 이메일입니다.");
+							break;
+						case "notOk" :
+							$("#emailMessage1").text("사용 불가능한 이메일입니다.");
+							break;
+					}
+				},
+				error : function() {
+					$("#emailMessage1").text("중복 확인 중 문제 발생, 다시 시도해주세요.");
+				},
+				complete : function() {
+					$("#checkEmailButton1").removeAttr("disabled");
+				}
+			});			
+		});	
+		
+		// 닉네임 중복 체크 버튼 클릭 이벤트
+		$("#checkNickNameButton1").click(function(e) {
+			e.preventDefault();
+			
+			$(this).attr("disabled", "");
+			const data = {
+					nickName : $("#form1").find("[name=nickName]").val()
+			};
+			$.ajax({
+				url : "${appRoot}/member/check",
+				type : "get",
+				data : data,
+				success : function(data) {
+					switch (data) {
+						case "ok" :
+							$("#nickNameMessage1").text("사용 가능한 닉네임입니다.");
+							break;
+						case "notOk" :
+							$("#nickNameMessage1").text("사용 불가능한 닉네임입니다.");
+							break;
+					}
+				},
+				error : function() {
+					$("#nickNameMessage1").text("중복 확인 중 문제 발생, 다시 시도해주세요.");
+				},
+				complete : function() {
+					$("#checkNickNameButton1").removeAttr("disabled");
+				}
+			});			
+		});	
 	});
 </script>
 
@@ -47,10 +116,15 @@
 
 <form id="form1" action="${appRoot }/member/signup" method="post">
 	아이디 : <input type="text" name="id" /> 
-	<button type="button" id="checkIdButton1">아이디 중복 확인</button> <br />
+	<button id="checkIdButton1" type="button">아이디 중복 확인</button>
+	<p id="idMessage1"></p> <br />
 	비밀번호 : <input type="password" name="password" /> <br />
-	이메일 : <input type="email" name="email" /> <br />
-	닉네임 : <input type="text" name="nickName" /> <br />
+	이메일 : <input type="email" name="email" /> 
+	<button id="checkEmailButton1" type="button">이메일 중복 확인</button> 
+	<p id="emailMessage1"></p> <br />
+	닉네임 : <input type="text" name="nickName" /> 
+	<button id="checkNickNameButton1" type="button">닉네임 중복 확인</button>
+	<p id="nickNameMessage1"></p> <br />
 	
 	<button>회원가입</button>
 </form>

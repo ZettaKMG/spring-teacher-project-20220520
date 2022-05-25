@@ -9,8 +9,16 @@
 		VALUES (#{id}, #{password}, #{email}, #{nickName})
 	</insert>	
 	
-	<select resultType="int" id="countMemberId">
+	<select id="countMemberId" resultType="int">
 		SELECT COUNT(id) FROM Member WHERE id = #{id}
+	</select>
+	
+	<select id="countEmail" resultType="int">
+		SELECT COUNT(email) FROM Member WHERE email = #{email}
+	</select>
+	
+	<select id="countNickName" resultType="int">
+		SELECT COUNT(nickName) FROM Member WHERE nickName = #{nickName}
 	</select>
 	
 </mapper>
