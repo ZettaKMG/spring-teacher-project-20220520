@@ -13,6 +13,12 @@
 
 <script>
 	$(document).ready(function() {
+		// 중복, 암호 확인 변수
+		let idOk = false;
+		let pwOk = false;
+		let emailOk = false;
+		let nickNameOk = false;
+		
 		// 아이디 중복 체크 버튼 클릭 이벤트
 		$("#checkIdButton1").click(function(e) {
 			e.preventDefault();
@@ -20,7 +26,9 @@
 			$(this).attr("disabled", "");
 			const data = {
 					id : $("#form1").find("[name=id]").val()					
-			};		
+			};	
+			
+			idOk = false;
 			$.ajax({
 				url : "${appRoot}/member/check",
 				type : "get",
@@ -29,6 +37,7 @@
 					switch (data) {
 						case "ok" :
 							$("#idMessage1").text("사용 가능한 아이디입니다.");
+							idOk = true;
 							break;
 						case "notOk" :
 							$("#idMessage1").text("사용 불가능한 아이디입니다.");
@@ -36,10 +45,11 @@
 					}
 				},
 				error : function() {
-					$("#idMessage1").text("중복 확인 중 문제 발생, 다시 시도해주세요.");
+					$("#idMessage1").text("아이디 중복 확인 중 문제 발생, 다시 시도해주세요.");
 				},
 				complete : function() {
 					$("#checkIdButton1").removeAttr("disabled");
+					enableSubmit();
 				}
 			});
 		});
@@ -52,6 +62,8 @@
 			const data = {
 					email : $("#form1").find("[name=email]").val()
 			};
+			
+			emailOk = false;
 			$.ajax({
 				url : "${appRoot}/member/check",
 				type : "get",
@@ -60,6 +72,7 @@
 					switch (data) {
 						case "ok" :
 							$("#emailMessage1").text("사용 가능한 이메일입니다.");
+							emailOk = true;
 							break;
 						case "notOk" :
 							$("#emailMessage1").text("사용 불가능한 이메일입니다.");
@@ -67,10 +80,11 @@
 					}
 				},
 				error : function() {
-					$("#emailMessage1").text("중복 확인 중 문제 발생, 다시 시도해주세요.");
+					$("#emailMessage1").text("이메일 중복 확인 중 문제 발생, 다시 시도해주세요.");
 				},
 				complete : function() {
 					$("#checkEmailButton1").removeAttr("disabled");
+					enableSubmit();
 				}
 			});			
 		});	
@@ -83,6 +97,8 @@
 			const data = {
 					nickName : $("#form1").find("[name=nickName]").val()
 			};
+			
+			nickNameOk = false;
 			$.ajax({
 				url : "${appRoot}/member/check",
 				type : "get",
@@ -91,6 +107,7 @@
 					switch (data) {
 						case "ok" :
 							$("#nickNameMessage1").text("사용 가능한 닉네임입니다.");
+							nickNameOk = true;
 							break;
 						case "notOk" :
 							$("#nickNameMessage1").text("사용 불가능한 닉네임입니다.");
@@ -98,13 +115,39 @@
 					}
 				},
 				error : function() {
-					$("#nickNameMessage1").text("중복 확인 중 문제 발생, 다시 시도해주세요.");
+					$("#nickNameMessage1").text("닉네임 중복 확인 중 문제 발생, 다시 시도해주세요.");
 				},
 				complete : function() {
 					$("#checkNickNameButton1").removeAttr("disabled");
+					enableSubmit();
 				}
 			});			
 		});	
+		
+		// 패스워드 오타 확인
+		$("#passwordInput1, #passwordInput2").keyup(function() {
+			const pw1 = $("#passwordInput1").val();
+			const pw2 = $("#passwordInput2").val();
+			
+			pwOk = false;
+			if (pw1 == pw2) {
+				$("#passwordMessage1").text("패스워드가 일치합니다.");
+				pwOk = true;
+			} else {
+				$("#passwordMessage1").text("패스워드가 일치하지 않습니다.");
+			}
+			
+			enableSubmit();
+		});
+		
+		// 회원가입 submit 버튼 활성화/비활성화 함수
+		const enableSubmit = function() {
+			if (idOk && pwOk && emailOk && nickNameOk) {
+				$("#submitButton1").removeAttr("disabled");
+			} else {
+				$("#submitButton1").attr("disabled", "");
+			}
+		};
 	});
 </script>
 
@@ -118,7 +161,11 @@
 	아이디 : <input type="text" name="id" /> 
 	<button id="checkIdButton1" type="button">아이디 중복 확인</button>
 	<p id="idMessage1"></p> <br />
-	비밀번호 : <input type="password" name="password" /> <br />
+	패스워드 : <input id="passwordInput1" type="password" name="password" /> <br />
+	
+	패스워드확인 : <input id="passwordInput2" type="password" name="passwordConfirm" /> <br />
+	<p id="passwordMessage1"></p>
+	
 	이메일 : <input type="email" name="email" /> 
 	<button id="checkEmailButton1" type="button">이메일 중복 확인</button> 
 	<p id="emailMessage1"></p> <br />
@@ -126,7 +173,7 @@
 	<button id="checkNickNameButton1" type="button">닉네임 중복 확인</button>
 	<p id="nickNameMessage1"></p> <br />
 	
-	<button>회원가입</button>
+	<button id="submitButton1" disabled>회원가입</button>
 </form>
 
 
