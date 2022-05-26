@@ -175,10 +175,10 @@
 
 	<div>
 	아이디 : <input type="text" value="${member.id }" readonly /> <br />
-	암호 : <input id="passwordInput1" type="text" value="${member.password }" /> <br />
-	암호확인 : <input id="passwordInput2" type="text" value="${member.password }" /> <br />
+	암호 : <input id="passwordInput1" type="text" value="" /> <br />
+	암호확인 : <input id="passwordInput2" type="text" value="" /> <br />
 	<p id="passwordMessage1"></p>
-	
+	 
 	이메일 : <input id="emailInput1" type="email" value="${member.email }" /> <button id="emailCheckButton1" disabled>이메일 중복확인</button> <br />
 	<p id="emailMessage1"></p>
 	
