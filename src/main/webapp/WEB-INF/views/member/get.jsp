@@ -18,14 +18,26 @@
 	<my:navBar></my:navBar>
 
 	<div>
-	아이디 : <input type="text" value="${member.id }" /> <br />
+	아이디 : <input type="text" value="${member.id }" readonly /> <br />
 	암호 : <input type="text" value="${member.password }" /> <br />
-	이메일 : <input type="email" value="${member.email }" /> <br />
-	닉네임 : <input type="text" value="${member.nickName }" /> <br />
-	가입일시 : <input type="datetime-local" value="${member.inserted }" /> <br />
+	암호확인 : <input type="text" value="${member.password }" /> <br />
+	이메일 : <input type="email" value="${member.email }" /> <button disabled>이메일 중복확인</button> <br />
+	닉네임 : <input type="text" value="${member.nickName }" /> <button disabled>닉네임 중복확인</button> <br />
+	가입일시 : <input type="datetime-local" value="${member.inserted }" readonly /> <br />
 	</div>
 
+	<!-- 요구 사항
+	1. 이메일 input에 변경 발생시 '이메일 중복확인 버튼 활성화'
+	   -> 버튼 클릭시 ajax로 요청/응답
+	2. 닉네임 input에 변경 발생시 '닉네임 중복확인 버튼 활성화'
+	   -> 버튼 클릭시 ajax로 요청/응답
+	
+	3. 수정버튼 활성화
+	   -> 암호/암호확인 일치, 이메일 중복확인 완료, 닉네임 중복확인 완료시에만 
+	 -->	
+
 	<div>
+	<button>수정</button>
 	<button data-bs-toggle="modal" data-bs-target="#modal1">삭제</button>
 	</div>
 
