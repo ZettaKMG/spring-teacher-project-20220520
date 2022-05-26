@@ -53,4 +53,16 @@ public class MemberService {
 		
 		return false;
 	}
+
+	public boolean modifyMember(MemberDto dto, String oldPassword) {
+		// db에서 member 읽기
+		MemberDto oldMember = memberMapper.selectMemberById(dto.getId());
+		
+		// 기존 password가 일치할 때만 계속 진행
+		if (oldMember.getPassword().equals(oldPassword)) {
+			return memberMapper.updateMember(dto) == 1;
+		}
+		
+		return false;
+	}
 }
