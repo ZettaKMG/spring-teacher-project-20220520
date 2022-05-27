@@ -10,6 +10,7 @@ public class BoardDto {
 	private int id;
 	private String title;
 	private String body;
+	private String writerNickName;
 	private LocalDateTime inserted;
 	private String memberId;
 	private int numOfReply;
