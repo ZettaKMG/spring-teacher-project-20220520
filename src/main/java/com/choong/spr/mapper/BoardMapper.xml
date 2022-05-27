@@ -27,8 +27,8 @@
 	</select>
 	
 	<insert id="insertBoard" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
-		INSERT INTO Board (title, body)
-		VALUES (#{title}, #{body})
+		INSERT INTO Board (title, body, memberId)
+		VALUES (#{title}, #{body}, #{memberId})
 	</insert>
 	
 	<select id="selectBoardById" resultType="com.choong.spr.domain.BoardDto">

@@ -10,12 +10,26 @@
 
 	<security:http>
 		<security:csrf disabled="true" />
-		<security:form-login default-target-url="/board/list" />
+		<security:form-login always-use-default-target="true" login-page="/member/login" default-target-url="/board/list" />
 		<security:logout logout-success-url="/board/list" />
+		<security:remember-me/>
 		
 		<!-- access 속성 작성법(책 p673 ~ p674) -->
+		<!-- 게시글 create, update, delete -->
 		<security:intercept-url pattern="/board/insert" access="isAuthenticated()" />
+		<security:intercept-url pattern="/board/modify" access="isAuthenticated()" />
+		<security:intercept-url pattern="/board/remove" access="isAuthenticated()" />
+		
+		<!-- 댓글 create, update, delete -->
+		<security:intercept-url pattern="/reply/insert" access="isAuthenticated()" />
+		<security:intercept-url pattern="/reply/modify" access="isAuthenticated()" />
+		<security:intercept-url pattern="/reply/delete" access="isAuthenticated()" />
+		
+		<!-- 회원정보 read, update, delete -->
 		<security:intercept-url pattern="/member/list" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/member/get" access="isAuthenticated()" />
+		<security:intercept-url pattern="/member/remove" access="isAuthenticated()" />
+		<security:intercept-url pattern="/member/modify" access="isAuthenticated()" />
 	</security:http>
 	
 	<security:authentication-manager>
