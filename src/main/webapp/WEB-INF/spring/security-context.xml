@@ -10,8 +10,30 @@
 
 	<security:http>
 		<security:csrf disabled="true" />
-		<security:form-login />
+		<security:form-login default-target-url="/board/list" />
+		<security:logout logout-success-url="/board/list" />
+		
+		<!-- access 속성 작성법(책 p673 ~ p674) -->
+		<security:intercept-url pattern="/board/insert" access="isAuthenticated()" />
+		<security:intercept-url pattern="/member/list" access="hasRole('ADMIN')" />
 	</security:http>
 	
-	<security:authentication-manager></security:authentication-manager>
+	<security:authentication-manager>
+		<security:authentication-provider>
+			<security:jdbc-user-service 
+			data-source-ref="dataSource"
+			users-by-username-query="
+				SELECT id, password, 1
+				FROM Member 
+				WHERE id = ?
+			" 
+			
+			authorities-by-username-query="
+				SELECT memberId, role
+				FROM Auth
+				WHERE memberId = ?
+			"
+			/>			
+		</security:authentication-provider>
+	</security:authentication-manager>
 </beans>
