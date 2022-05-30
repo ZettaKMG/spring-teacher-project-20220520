@@ -20,4 +20,6 @@ public interface ReplyMapper {
 
 	ReplyDto selectReplyById(int id);
 
+	void deleteByMemberId(String memberId);
+
 }

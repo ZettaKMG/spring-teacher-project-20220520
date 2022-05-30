@@ -48,4 +48,9 @@
 	WHERE id = #{id}			   
 	</select>	
 	
+	<delete id="deleteByMemberId">
+	DELETE FROM Reply
+	WHERE memberId = #{memberId}
+	</delete>
+	
 </mapper>
