@@ -46,26 +46,36 @@ public class ReplyController {
 
 	@PutMapping(path = "modify", produces = "text/plain;charset=UTF-8")
 	public ResponseEntity<String> modify(@RequestBody ReplyDto dto, Principal principal) {
-		boolean success = service.updateReply(dto, principal);
-
-		if (success) {
-			return ResponseEntity.ok("댓글이 변경되었습니다.");
-		}
 		
-		return ResponseEntity.status(500).body("");
+		if (principal == null) {
+			return ResponseEntity.status(401).build();
+		} else {
+			boolean success = service.updateReply(dto, principal);
+			
+			if (success) {
+				return ResponseEntity.ok("댓글이 변경되었습니다.");
+			}
+			
+			return ResponseEntity.status(500).body("");			
+		}
 			
 	}
 	
 	@DeleteMapping(path ="delete/{id}", produces = "text/plain;charset=UTF-8")
-	public ResponseEntity<String> delete(@PathVariable("id") int id) {
-		boolean success = service.deleteReply(id);
+	public ResponseEntity<String> delete(@PathVariable("id") int id, Principal principal) {
 		
-		if (success) {
-			return ResponseEntity.ok("댓글을 삭제하였습니다.");
+		if (principal == null) {
+			return ResponseEntity.status(401).build();
 		} else {
-			return ResponseEntity.status(500).body("");
+			
+			boolean success = service.deleteReply(id, principal);
+			
+			if (success) {
+				return ResponseEntity.ok("댓글을 삭제하였습니다.");
+			} else {
+				return ResponseEntity.status(500).body("");
+			}			
 		}
-		
 	}
 	
 	@GetMapping("list")

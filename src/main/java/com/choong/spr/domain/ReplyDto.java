@@ -10,6 +10,7 @@ public class ReplyDto {
 	private int boardId;
 	private String content;
 	private String memberId;
+	private String writerNickName;
 	private LocalDateTime inserted;
 
 	public String getPrettyInserted() {

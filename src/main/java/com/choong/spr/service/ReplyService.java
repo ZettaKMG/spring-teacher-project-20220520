@@ -38,9 +38,17 @@ public class ReplyService {
 		
 	}
 
-	public boolean deleteReply(int id) {
-		// TODO Auto-generated method stub
-		return mapper.deleteReply(id) == 1;
+	public boolean deleteReply(int id, Principal principal) {
+		ReplyDto old = mapper.selectReplyById(id);
+		
+		if (old.getMemberId().equals(principal.getName())) {
+			// 댓글 작성자와 로그인한 유저가 같은 때만 삭제
+			return mapper.deleteReply(id) == 1;
+		} else {
+			// 그렇지 않으면 return false
+			return false;
+		}
+		
 	}
 	
 }

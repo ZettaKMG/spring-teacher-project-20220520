@@ -10,13 +10,14 @@
 	</insert>
 	
 	<select id="selectAllBoardId" resultType="com.choong.spr.domain.ReplyDto">
-	SELECT id, 
-	       board_id boardId,
-	       content,
-	       inserted
-	FROM Reply
-	WHERE board_id = #{boardId}
-	ORDER BY id
+	SELECT r.id, 
+	       r.board_id boardId,
+	       r.content,
+	       m.nickName writerNickName,
+	       r.inserted
+	FROM Reply r JOIN Member m ON r.memberId = m.id
+	WHERE r.board_id = #{boardId}
+	ORDER BY r.id
 	</select>
 	
 	<update id="updateReply">
@@ -44,6 +45,6 @@
 		   inserted
 	FROM Reply
 	WHERE id = #{id}			   
-	</select>
+	</select>	
 	
 </mapper>
