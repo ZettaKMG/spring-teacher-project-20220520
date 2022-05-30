@@ -11,6 +11,7 @@ public class ReplyDto {
 	private String content;
 	private String memberId;
 	private String writerNickName;
+	private boolean own;
 	private LocalDateTime inserted;
 
 	public String getPrettyInserted() {

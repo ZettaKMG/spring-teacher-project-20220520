@@ -79,8 +79,8 @@
 										<i class="fa-solid fa-user"></i>
 										\${list[i].writerNickName }
 									</span>
-							 		<span>
-							 			\${list[i].content }
+							 		<span id="replyContent\${list[i].id }">
+							 		 //	\${list[i].content } // script 공격 받을 수 있음
 							 		</span>
 								 	
 								 	
@@ -100,6 +100,7 @@
 						`);
 						// replyElement.text(list[i].content);
 						replyListElement.append(replyElement);
+						$("#replyContent" + list[i].id).text(list[i].content); // script 공격 방지용 코드
 						
 					} // end of for
 					

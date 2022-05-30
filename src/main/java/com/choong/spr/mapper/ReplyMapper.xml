@@ -14,7 +14,8 @@
 	       r.board_id boardId,
 	       r.content,
 	       m.nickName writerNickName,
-	       r.inserted
+	       r.inserted,
+	       IF (m.id = #{memberId}, 1, 0) own
 	FROM Reply r JOIN Member m ON r.memberId = m.id
 	WHERE r.board_id = #{boardId}
 	ORDER BY r.id
