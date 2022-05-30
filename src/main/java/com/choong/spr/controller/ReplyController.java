@@ -1,5 +1,6 @@
 package com.choong.spr.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,21 +26,27 @@ public class ReplyController {
 	private ReplyService service;
 
 	@PostMapping(path = "insert", produces = "text/plain;charset=UTF-8")
-	public ResponseEntity<String> insert(ReplyDto dto) {
+	public ResponseEntity<String> insert(ReplyDto dto, Principal principal) {
 
-		boolean success = service.insertReply(dto);
-
-		if (success) {
-			return ResponseEntity.ok("새 댓글이 등록되었습니다.");
+		if (principal == null) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 		} else {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("error");
-		}
-		
+			String memberId = principal.getName();
+			dto.setMemberId(memberId);
+			
+			boolean success = service.insertReply(dto);
+						
+			if (success) {
+				return ResponseEntity.ok("새 댓글이 등록되었습니다.");
+			} else {
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("error");
+			}			
+		}		
 	}
 
 	@PutMapping(path = "modify", produces = "text/plain;charset=UTF-8")
-	public ResponseEntity<String> modify(@RequestBody ReplyDto dto) {
-		boolean success = service.updateReply(dto);
+	public ResponseEntity<String> modify(@RequestBody ReplyDto dto, Principal principal) {
+		boolean success = service.updateReply(dto, principal);
 
 		if (success) {
 			return ResponseEntity.ok("댓글이 변경되었습니다.");

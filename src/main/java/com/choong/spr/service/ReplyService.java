@@ -1,6 +1,6 @@
 package com.choong.spr.service;
 
-import java.time.LocalDateTime;
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +25,22 @@ public class ReplyService {
 		return mapper.selectAllBoardId(boardId);
 	}
 
-	public boolean updateReply(ReplyDto dto) {
-		// TODO Auto-generated method stub
-		return mapper.updateReply(dto) == 1;
+	public boolean updateReply(ReplyDto dto, Principal principal) {
+		ReplyDto old = mapper.selectReplyById(dto.getId());
+		
+		if (old.getMemberId().equals(principal.getName())) {
+			// 댓글 작성자와 로그인한 유저가 같을 때만 수정
+			return mapper.updateReply(dto) == 1;
+		} else {
+			// 그렇지 않으면 return false
+			return false;
+		}
+		
 	}
 
 	public boolean deleteReply(int id) {
 		// TODO Auto-generated method stub
 		return mapper.deleteReply(id) == 1;
 	}
-
+	
 }

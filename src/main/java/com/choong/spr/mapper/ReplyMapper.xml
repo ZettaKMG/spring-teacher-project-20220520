@@ -5,8 +5,8 @@
 <mapper namespace="com.choong.spr.mapper.ReplyMapper">
 
 	<insert id="insertReply">
-	INSERT INTO Reply (board_id, content)
-	VALUES (#{boardId}, #{content})
+	INSERT INTO Reply (board_id, content, memberId)
+	VALUES (#{boardId}, #{content}, #{memberId})
 	</insert>
 	
 	<select id="selectAllBoardId" resultType="com.choong.spr.domain.ReplyDto">
@@ -35,5 +35,15 @@
 	DELETE FROM Reply
 	WHERE board_id = #{boardId}
 	</delete>
+	
+	<select id="selectReplyById" resultType="com.choong.spr.domain.ReplyDto">
+	SELECT id,
+		   board_id boardId,
+		   content,
+		   memberId,
+		   inserted
+	FROM Reply
+	WHERE id = #{id}			   
+	</select>
 	
 </mapper>

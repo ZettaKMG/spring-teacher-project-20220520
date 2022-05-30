@@ -16,4 +16,6 @@ public interface ReplyMapper {
 
 	void deleteByBoardId(int boardId);
 
+	ReplyDto selectReplyById(int id);
+
 }
