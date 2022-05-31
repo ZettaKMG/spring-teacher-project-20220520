@@ -167,7 +167,7 @@
 </head>
 <body>
 
-	<my:navBar></my:navBar>
+	<my:navBar current="memberInfo"></my:navBar>
 
 	<div>
 		${message }
