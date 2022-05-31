@@ -1,5 +1,7 @@
 package com.choong.spr.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +37,28 @@ public class BoardService {
 		// 파일 등록
 		if (file.getSize() > 0) {
 			mapper.insertFile(board.getId(), file.getOriginalFilename());
+			saveFile(board.getId(), file); // desk top 저장 -> aws 저장으로 바꿀 예
 		}
 		
 		return cnt == 1;
+	}
+
+	private void saveFile(int id, MultipartFile file) {
+		// 디렉토리 만들기		
+		String pathStr ="C:/imgtmp/board/" + id + "/";
+		File path = new File(pathStr);
+		path.mkdirs();
+		
+		// 작성할 파일
+		File des = new File(pathStr + file.getOriginalFilename());
+		
+		try {
+			// 파일 저장
+			file.transferTo(des);
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
 	}
 
 	public BoardDto getBoardById(int id) {

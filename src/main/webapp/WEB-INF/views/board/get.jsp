@@ -287,7 +287,7 @@
 					</div>
 					
 					<div>
-						<img src="C:/imgtmp/board/${board.id }/${board.fileName }" alt="" />
+						<img src="file:///C:/imgtmp/board/${board.id }/${board.fileName }" alt="" />
 					</div>
 					
 					<div>
