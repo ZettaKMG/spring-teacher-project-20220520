@@ -3,6 +3,7 @@ package com.choong.spr.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.choong.spr.domain.BoardDto;
 
@@ -22,4 +23,6 @@ public interface BoardMapper {
 
 	void deleteByMemberId(String memberId);
 
+	void insertFile(@Param("boardId") int boardId, @Param("fileName") String fileName);
+	
 }

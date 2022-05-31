@@ -1,11 +1,11 @@
 package com.choong.spr.service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.choong.spr.domain.BoardDto;
 import com.choong.spr.mapper.BoardMapper;
@@ -25,9 +25,19 @@ public class BoardService {
 		return mapper.selectBoardAll(type, "%" + keyword + "%");
 	}
 
-	public boolean insertBoard(BoardDto board) {
+	@Transactional
+	public boolean insertBoard(BoardDto board, MultipartFile file) {
 //		board.setInserted(LocalDateTime.now());
-		return mapper.insertBoard(board) == 1;
+		
+		// 게시글 등록
+		int cnt = mapper.insertBoard(board);
+		
+		// 파일 등록
+		if (file.getSize() > 0) {
+			mapper.insertFile(board.getId(), file.getOriginalFilename());
+		}
+		
+		return cnt == 1;
 	}
 
 	public BoardDto getBoardById(int id) {
