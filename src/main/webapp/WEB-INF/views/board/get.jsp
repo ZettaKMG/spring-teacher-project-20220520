@@ -288,7 +288,7 @@
 					
 					<c:forEach items="${board.fileName }" var="file">
 						<div>
-							<img src="${imageUrl }/board/${board.id }/${file } }" alt="" />
+							<img src="${imageUrl }/board/${board.id }/${file }" alt="" />
 						</div>
 					</c:forEach>
 					
