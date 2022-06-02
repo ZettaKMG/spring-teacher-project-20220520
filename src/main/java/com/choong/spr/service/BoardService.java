@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -45,6 +46,11 @@ public class BoardService {
 	public void init() {
 		Region region = Region.AP_NORTHEAST_2;
 		this.s3 = S3Client.builder().region(region).build();
+	}
+	
+	@PreDestroy
+	public void destroy() {
+		this.s3.close();
 	}
 
 	@Transactional
