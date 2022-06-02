@@ -80,4 +80,15 @@
 		VALUES (#{boardId}, #{fileName})
 	</insert>
 	
+	<select id="selectFileByBoardId" resultType="string">
+		SELECT fileName
+		FROM File
+		WHERE boardId = #{boardId}
+	</select>
+	
+	<delete id="deleteFileByBoardId">
+		DELETE FROM File
+		WHERE boardId = #{boardId}
+	</delete>
+	
 </mapper>

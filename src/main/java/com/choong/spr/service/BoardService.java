@@ -73,7 +73,25 @@ public class BoardService {
 
 	@Transactional
 	public boolean deleteBoard(int id) {
-
+		// 파일 목록 읽기
+		String fileName = mapper.selectFileByBoardId(id);
+		
+		// 실제파일 삭제
+		if (fileName != null && !fileName.isEmpty()) {
+			String folder = "C:/imgtmp/board/" + id + "/";
+			String path = folder + fileName;
+			
+			File file = new File(path);
+			file.delete();
+			
+			File dir = new File(folder);
+			dir.delete();
+		}
+		
+		// 파일테이블 삭제
+		mapper.deleteFileByBoardId(id);
+		
+		// 댓글테이블 삭제
 		replyMapper.deleteByBoardId(id);
 		
 		return mapper.deleteBoard(id) == 1;

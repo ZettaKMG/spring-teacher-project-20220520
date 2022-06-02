@@ -24,8 +24,7 @@
 	<update id="updateReply">
 	UPDATE Reply
 	SET content = #{content}
-	WHERE id = #{id}
-	
+	WHERE id = #{id}	
 	</update>
 	
 	<delete id="deleteReply">
