@@ -287,8 +287,14 @@
 					</div>
 					
 					<c:forEach items="${board.fileName }" var="file">
+						<%
+							String file = (String) pageContext.getAttribute("file");	
+							String encodedFileName = java.net.URLEncoder.encode(file, "utf-8");
+							pageContext.setAttribute("encodedFileName", encodedFileName);
+						%>
+					
 						<div>
-							<img src="${imageUrl }/board/${board.id }/${file }" alt="" />
+							<img src="${imageUrl }/board/${board.id }/${encodedFileName }" alt="" />
 						</div>
 					</c:forEach>
 					
