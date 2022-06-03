@@ -85,14 +85,14 @@ public class BoardController {
 	}
 	
 	@PostMapping("modify")
-	public String modify(BoardDto dto, Principal principal, RedirectAttributes rttr) {
+	public String modify(BoardDto dto, MultipartFile[] addFileList, Principal principal, RedirectAttributes rttr) {
 		// 게시물 정보 얻기
 		BoardDto oldBoard = service.getBoardById(dto.getId());
 		
 		// 게시물 작성자(memberId)와 principal의 name과 비교해서 같을 때만 진행
 		if (oldBoard.getMemberId().equals(principal.getName())) {
 			
-			boolean success = service.updateBoard(dto);
+			boolean success = service.updateBoard(dto, addFileList);
 			
 			if (success) {
 				rttr.addFlashAttribute("message", "글이 수정되었습니다.");

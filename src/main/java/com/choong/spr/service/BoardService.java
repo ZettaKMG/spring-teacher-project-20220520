@@ -61,17 +61,21 @@ public class BoardService {
 		int cnt = mapper.insertBoard(board);
 		
 		// 파일 등록(여러 개)
+		addFiles(board.getId(), files); // 아래의 addFiles 메소드로 추출		
+		
+		return cnt == 1;
+	}
+
+	private void addFiles(int id, MultipartFile[] files) {
 		if (files != null) {
 			for (MultipartFile file : files) {
 				if (file.getSize() > 0) {
-					mapper.insertFile(board.getId(), file.getOriginalFilename());
+					mapper.insertFile(id, file.getOriginalFilename());
 //					saveFile(board.getId(), file); // desk top 파일 시스템에 저장
-					saveFileAwsS3(board.getId(), file); // aws s3에 업로드
+					saveFileAwsS3(id, file); // aws s3에 업로드
 				}				
 			}
-		}		
-		
-		return cnt == 1;
+		}
 	}
 
 	// aws s3에 파일 업로드 하는 메소드
@@ -127,9 +131,18 @@ public class BoardService {
 		return board;
 	}
 
-	public boolean updateBoard(BoardDto dto) {
-		// TODO Auto-generated method stub
-		return mapper.updateBoard(dto) == 1;
+	@Transactional
+	public boolean updateBoard(BoardDto dto, MultipartFile[] addFileList) {
+		if (addFileList != null) {
+			// File 테이블에 추가된 파일 insert
+			// s3에 파일 upload
+			addFiles(dto.getId(), addFileList);			
+		}
+		
+		// Board 테이블 업데이트
+		int cnt = mapper.updateBoard(dto);
+		
+		return cnt == 1;
 	}
 
 	@Transactional

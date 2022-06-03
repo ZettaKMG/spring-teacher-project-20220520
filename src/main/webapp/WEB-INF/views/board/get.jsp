@@ -28,6 +28,7 @@
 			$("#textarea1").removeAttr("readonly");
 			$("#modify-submit1").removeClass("d-none");
 			$("#delete-submit1").removeClass("d-none");
+			$("#addFileInputContainer1").removeClass("d-none");
 		});
 		
 		$("#delete-submit1").click(function(e) {
@@ -271,7 +272,7 @@
 					</div>
 				</c:if>
 				
-				<form id="form1" action="${appRoot }/board/modify" method="post">
+				<form id="form1" action="${appRoot }/board/modify" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="id" value="${board.id }"/>
 					
 					<div>
@@ -297,6 +298,11 @@
 							<img src="${imageUrl }/board/${board.id }/${encodedFileName }" alt="" />
 						</div>
 					</c:forEach>
+					
+					<div id="addFileInputContainer1" class="d-none">
+						파일 추가 : 
+						<input type="file" multiple="multiple" name="addFileList" />
+					</div>
 					
 					<div>
 						<label for="input3" class="form-label">작성자</label>
