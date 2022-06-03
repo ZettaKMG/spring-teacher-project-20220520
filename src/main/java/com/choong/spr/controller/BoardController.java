@@ -85,7 +85,7 @@ public class BoardController {
 	}
 	
 	@PostMapping("modify")
-	public String modify(BoardDto dto, List<String> removeFileList, MultipartFile[] addFileList, Principal principal, RedirectAttributes rttr) {
+	public String modify(BoardDto dto, @RequestParam(name = "removeFileList", required = false) ArrayList<String> removeFileList, MultipartFile[] addFileList, Principal principal, RedirectAttributes rttr) {
 		// 게시물 정보 얻기
 		BoardDto oldBoard = service.getBoardById(dto.getId());
 		

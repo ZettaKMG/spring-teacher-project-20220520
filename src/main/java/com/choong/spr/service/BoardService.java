@@ -134,7 +134,11 @@ public class BoardService {
 	@Transactional
 	public boolean updateBoard(BoardDto dto, List<String> removeFileList, MultipartFile[] addFileList) {
 		if (removeFileList != null) {
-			removeFiles(dto.getId(), removeFileList);
+//			removeFiles(dto.getId(), removeFileList);
+			for (String fileName : removeFileList) {
+				deleteFromAwsS3(dto.getId(), fileName);
+				mapper.deleteFileByBoardIdAndFileName(dto.getId(), fileName);
+			}
 		}
 		
 		if (addFileList != null) {

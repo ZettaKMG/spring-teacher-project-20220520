@@ -96,4 +96,10 @@
 		WHERE boardId = #{boardId}
 	</select>
 	
+	<delete id="deleteFileByBoardIdAndFileName">
+		DELETE FROM File
+		WHERE boardId = #{boardId}
+		  AND fileName = #{fileName}
+	</delete>
+	
 </mapper>
