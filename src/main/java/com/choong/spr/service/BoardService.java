@@ -132,7 +132,11 @@ public class BoardService {
 	}
 
 	@Transactional
-	public boolean updateBoard(BoardDto dto, MultipartFile[] addFileList) {
+	public boolean updateBoard(BoardDto dto, List<String> removeFileList, MultipartFile[] addFileList) {
+		if (removeFileList != null) {
+			removeFiles(dto.getId(), removeFileList);
+		}
+		
 		if (addFileList != null) {
 			// File 테이블에 추가된 파일 insert
 			// s3에 파일 upload
@@ -164,6 +168,15 @@ public class BoardService {
 		}
 		*/
 		
+		removeFiles(id, fileList); // 아래 removeFile 메소드로 추출
+		
+		// 댓글테이블 삭제
+		replyMapper.deleteByBoardId(id);
+		
+		return mapper.deleteBoard(id) == 1;
+	}
+
+	private void removeFiles(int id, List<String> fileList) {
 		// aws s3에서 파일 삭제(여러 개일 때)
 		for (String fileName : fileList) {
 			deleteFromAwsS3(id, fileName);			
@@ -171,11 +184,6 @@ public class BoardService {
 		
 		// 파일테이블 삭제
 		mapper.deleteFileByBoardId(id);
-		
-		// 댓글테이블 삭제
-		replyMapper.deleteByBoardId(id);
-		
-		return mapper.deleteBoard(id) == 1;
 	}
 
 	// aws s3에서 파일 지우는 메소드

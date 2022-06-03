@@ -29,6 +29,7 @@
 			$("#modify-submit1").removeClass("d-none");
 			$("#delete-submit1").removeClass("d-none");
 			$("#addFileInputContainer1").removeClass("d-none");
+			$(".removeFileCheckbox").removeClass("d-none");
 		});
 		
 		$("#delete-submit1").click(function(e) {
@@ -293,10 +294,19 @@
 							String encodedFileName = java.net.URLEncoder.encode(file, "utf-8");
 							pageContext.setAttribute("encodedFileName", encodedFileName);
 						%>
-					
-						<div>
-							<img src="${imageUrl }/board/${board.id }/${encodedFileName }" alt="" />
-						</div>
+						<div class="row">
+							<div class="col-1">
+								<div class="d-none removeFileCheckbox">
+									삭제 <br />
+									<input type="checkbox" name="removeFileList" value="${file }"/>
+								</div>
+							</div>
+							<div class="col-11">
+								<div>
+									<img class="img-fluid" src="${imageUrl }/board/${board.id }/${encodedFileName }" alt="" />
+								</div>
+							</div>
+						</div>						
 					</c:forEach>
 					
 					<div id="addFileInputContainer1" class="d-none">
