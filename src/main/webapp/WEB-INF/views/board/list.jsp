@@ -51,6 +51,15 @@
 										<c:out value="${board.title }" />
 									</a>
 									
+									<!-- 파일 업로드 여부 표시 -->
+									<c:if test="${board.hasFile }">
+										<!-- span.badge.rounded-pill.bg-light.text-dark -->
+										<span class="badge rounded-pill bg-light text-dark">
+											<i class="fa-solid fa-file"></i>
+										</span>
+									</c:if>
+									
+									<!-- 댓글 수 표시 -->
 									<c:if test="${board.numOfReply > 0 }">
 										<span class="badge rounded-pill bg-light text-dark">
 											<i class="fa-solid fa-comment-dots"></i>
