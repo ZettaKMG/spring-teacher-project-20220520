@@ -8,7 +8,7 @@
 		SELECT b.id, 
 			   b.title, 
 			   b.inserted, 
-			   COUNT(r.id) numOfReply,
+			   COUNT(DISTINCT r.id) numOfReply,
 			   m.nickName writerNickName,
 			   COUNT(f.id) hasFile
 		FROM Board b LEFT JOIN Reply r ON b.id = r.board_id
